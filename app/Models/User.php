@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,8 +18,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
         'password',
+        'roles_id', // Menambahkan role_id agar bisa diisi
+        'kelas_id',
+        'nisn',    // Kolom tambahan untuk siswa
+        'nis',     // Kolom tambahan untuk siswa
+        'nip',     // Kolom tambahan untuk guru/pegawai
     ];
 
     /**
@@ -42,4 +45,36 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relationship to the Role model.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    // Relasi ke Kelas (hanya untuk siswa)
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
+
+    public function candidatesAsKetua()
+    {
+        return $this->hasMany(Candidate::class, 'ketua_id');
+    }
+
+    /**
+     * Relasi dengan model Candidat sebagai Wakil.
+     */
+    public function candidatesAsWakil()
+    {
+        return $this->hasMany(Candidate::class, 'wakil_id');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

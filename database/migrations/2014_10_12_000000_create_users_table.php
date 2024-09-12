@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username')->unique();
             $table->string('password');
-            $table->rememberToken();
+            $table->bigInteger('nisn')->unique()->nullable(); // Optional for 'siswa'
+            $table->bigInteger('nis')->unique()->nullable();  // Optional for 'siswa'
+            $table->bigInteger('nip')->unique()->nullable();  // Optional for 'guru' or 'pegawai'
             $table->timestamps();
+            $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onDelete('set null'); // Relasi ke tabel kelas
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade'); // Relasi ke tabel roles
         });
     }
 
