@@ -27,11 +27,20 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('candidate.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Candidate</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-link nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Logout</p>
+                                </button>
+                            </form>
+                        </li>                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

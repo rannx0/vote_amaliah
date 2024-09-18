@@ -23,7 +23,8 @@ class VoteController extends Controller
 
         // Cek apakah pengguna sudah memberikan suara
         if (Vote::where('user_id', $user->id)->exists()) {
-            return redirect()->back()->with('error', 'Anda sudah memberikan suara.');
+            Auth::logout();
+            return redirect()->route('already_vote');
         }
 
         // Validasi input
@@ -36,8 +37,14 @@ class VoteController extends Controller
             'user_id' => $user->id,
             'candidate_id' => $request->input('candidate_id'),
         ]);
+        Auth::logout();
+        return redirect()->route('end')->with('success', 'Vote berhasil disimpan.');
 
-        return redirect()->route('/home');
+    }
+
+    public function endindex() 
+    {
+        return view('end');
     }
 }
 
