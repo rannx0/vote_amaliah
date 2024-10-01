@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\DataUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,13 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/candidate/store', [CandidateController::class, 'store'])->name('candidate.store');
     Route::put('/candidate/{candidate}/update', [CandidateController::class, 'update'])->name('candidate.update');
     Route::delete('/candidate/{id}/destroy', [CandidateController::class, 'destroy'])->name('candidate.destroy');
+
+    Route::get('/datauser', [DataUserController::class, 'index'])->name('datauser.index');
+    Route::get('/datauser/create', [DataUserController::class, 'store'])->name('datauser.store');
+    Route::put('/datauser/{id}', [DataUserController::class, 'update'])->name('user.update');
+    Route::delete('/datauser/{id}', [DataUserController::class, 'destroy'])->name('user.destroy');
 });
+
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
