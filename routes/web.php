@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,8 +50,13 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('/datauser', [DataUserController::class, 'index'])->name('datauser.index');
     Route::get('/datauser/create', [DataUserController::class, 'store'])->name('datauser.store');
-    Route::put('/datauser/{id}', [DataUserController::class, 'update'])->name('user.update');
-    Route::delete('/datauser/{id}', [DataUserController::class, 'destroy'])->name('user.destroy');
+    Route::put('/datauser/{id}', [DataUserController::class, 'update'])->name('datauser.update');
+    Route::delete('/datauser/{id}', [DataUserController::class, 'destroy'])->name('datauser.destroy');
+
+    Route::get('/datakelas', [KelasController::class, 'index'])->name('datakelas.index');
+    Route::post('/datakelas/store', [KelasController::class, 'store'])->name('datakelas.store');
+    Route::put('/datakelas/{id}', [KelasController::class, 'update'])->name('datakelas.update');
+    Route::delete('/datakelas/delete/{id}', [KelasController::class, 'destroy'])->name('datakelas.destroy');
 });
 
 

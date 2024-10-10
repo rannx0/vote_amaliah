@@ -39,6 +39,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('datakelas.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Kelas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-link nav-link">

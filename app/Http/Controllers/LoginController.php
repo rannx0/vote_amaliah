@@ -42,7 +42,19 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentication passed
             $userId = Auth::user()->id; // Get the authenticated user's ID
-            return redirect()->route('vote', ['id' => $userId]); // Redirect to intended page or home
+
+            // Check if the user has already voted
+            $hasVoted = \DB::table('votes') // Assuming your table is named 'votes'
+                ->where('user_id', $userId) // Assuming 'user_id' is the column for user in votes table
+                ->exists(); // Check if any record exists
+
+            if ($hasVoted) {
+                // If the user has already voted, redirect to already_vote page
+                return redirect()->route('already_vote');
+            } else {
+                // If the user has not voted, redirect to the vote page
+                return redirect()->route('vote', ['id' => $userId]);
+            }
         }
 
         // Authentication failed
