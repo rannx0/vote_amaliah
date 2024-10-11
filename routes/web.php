@@ -57,9 +57,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/datakelas/store', [KelasController::class, 'store'])->name('datakelas.store');
     Route::put('/datakelas/{id}', [KelasController::class, 'update'])->name('datakelas.update');
     Route::delete('/datakelas/delete/{id}', [KelasController::class, 'destroy'])->name('datakelas.destroy');
+
+    Route::get('/datavote', [VoteController::class, 'DataVote'])->name('datavote.index');
 });
-
-
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);

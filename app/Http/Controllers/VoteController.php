@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class VoteController extends Controller
 {
+
+    public function DataVote() {
+    
+    $candidates = Candidate::withCount('votes')->get();
+
+    return view('admin.datavote.index', compact('candidates'));
+    }
+
+
     public function index() {
         // Ambil semua kandidat dari database
         $candidates = Candidate::all();
